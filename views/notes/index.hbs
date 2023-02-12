@@ -1,0 +1,62 @@
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="navbar-brand font-weight-bold">TODO</a>
+  <form class="form-inline">
+    <div class="dropdown">
+      <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {{#if user}}
+        {{user.username}}
+        {{else}}
+        Account
+        {{/if}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {{#if user}}
+        <a class="dropdown-item" href="/users/logout">logout</a>
+        {{else}}
+        <a class="dropdown-item" href="/users/login">Login</a>
+        {{/if}}
+      </div>
+    </div>
+  </form>
+</nav>
+
+
+
+<section class="mt-4">
+  <div class="container">
+    <div class="row mt-4">
+      <a href="/add" class="btn btn-success ml-auto mb-4">Add Notes</a>
+    </div>
+
+
+    {{#if notes}}
+    <table class="table mt-4" id="productTable">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Title</th>
+          <th scope="col">Discription</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each notes}}
+        <tr>
+          <th scope="row" id="number">1</th>
+          <td>{{this.title}}</td>
+          <td>{{this.desc}}</td>
+          <td>
+            <a href="/edit-notes/{{this._id}}" class="btn btn-primary">Edit</a>
+            <a href="/delete-notes/{{this._id}}" class="btn btn-danger"
+              onclick="return confirm('Are you wanted to delete {{this.title}} ?')">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{else}}
+    <h1 class="text-center">No Notes &#128549;</h1>
+    {{/if}}
+  </div>
+</section>
